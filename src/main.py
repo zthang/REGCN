@@ -48,6 +48,7 @@ list_name = f"0710_{history_len}"
 # index_entity = faiss.read_index(f"../entity.index_{list_name}")
 # print("loading index_rel...")
 # index_rel = faiss.read_index(f"../rel.index_{list_name}")
+
 faiss_list_e = []
 faiss_list_r = []
 index_entity = None
@@ -174,8 +175,8 @@ def run_experiment(args, n_hidden=None, n_layers=None, dropout=None, n_bases=Non
     model_name = "{}-{}-{}-ly{}-dilate{}-his{}-weight:{}-discount:{}-angle:{}-dp{}|{}|{}|{}-gpu{}"\
         .format(args.dataset, args.encoder, args.decoder, args.n_layers, args.dilate_len, args.train_history_len, args.weight, args.discount, args.angle,
                 args.dropout, args.input_dropout, args.hidden_dropout, args.feat_dropout, args.gpu)
-    # model_state_file = f'../models/{model_name}_{get_time()}'
-    model_state_file = f'../models/ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-weight:0.5-discount:1.0-angle:10-dp0.2|0.2|0.2|0.2-gpu2'
+    model_state_file = f'../models/{model_name}_{get_time()}'
+    # model_state_file = f'../models/ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-weight:0.5-discount:1.0-angle:10-dp0.2|0.2|0.2|0.2-gpu2'
     print("Sanity Check: stat name : {}".format(model_state_file))
     print("Sanity Check: Is cuda available ? {}".format(torch.cuda.is_available()))
 
@@ -464,7 +465,7 @@ if __name__ == '__main__':
     args.task_weight = 0.7
     args.gpu = gpu
     args.n_epochs = n_epochs
-    args.test = True
+    args.test = False
     if use_aim:
         run = Run(experiment=f"测试输入同训练 历史输入天数:{args.train_history_len}")
         run["hparams"] = {
